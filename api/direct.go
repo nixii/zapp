@@ -14,6 +14,8 @@ func HandleRequest(w http.ResponseWriter, r *http.Request) {
 	// Handle requests
 	if r.Method == http.MethodGet {
 		err = Get(w, r)
+	} else if r.Method == http.MethodPut {
+		err = Put(w, r)
 	} else {
 		err = errors.ErrUnsupported
 	}

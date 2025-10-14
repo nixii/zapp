@@ -14,9 +14,9 @@ type PutRequest struct {
 }
 
 // Verify a put reqest has all the information needed
-func Put_VerifyRequest(req PutRequest) error {
-	if req.Website == ""        { return WebsiteRequired }
-	if req.Username == ""       { return UsernameRequired }
-	if req.MasterPassword == "" {return MissingMasterPassword}
+func (self *PutRequest) VerifyRequest() error {
+	if self.Website == ""        { return WebsiteRequired }
+	if self.Username == ""       { return UsernameRequired }
+	if self.MasterPassword == "" {return MissingMasterPassword}
 	return nil
 }

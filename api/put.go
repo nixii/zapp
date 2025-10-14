@@ -8,10 +8,10 @@ import (
 	"nixii.dev/zipp/save"
 )
 
-func Get(w http.ResponseWriter, req *http.Request) error {
+func Put(w http.ResponseWriter, req *http.Request) error {
 
 	// Get the request
-	var data requests.GetRequest
+	var data requests.PutRequest
 	err := getJson(req, &data)
 	if err != nil {
 		return err
@@ -23,20 +23,24 @@ func Get(w http.ResponseWriter, req *http.Request) error {
 		return err
 	}
 
-	// Perform the reqeust
+	// Load the file
 	saves, err := save.ReadSaveFile(data.MasterPassword)
 	if err != nil {
 		return err
 	}
 
-	// Get the password
-	pwd, err := saves.GetAccountInfo(data.Website, data.Username)
+	// Save
+	saves.SetPassword(data.Website, data.Username, save.Password{
+		Password:  *data.Password,
+		Email: *data.Email,
+	})
+	fmt.Println(saves)
+
+	// Set the password file
+	err = save.WriteSaveFile(saves, data.MasterPassword)
 	if err != nil {
 		return err
 	}
-
-	// Report the pwd
-	fmt.Println(pwd)
-
+	
 	return nil
 }
