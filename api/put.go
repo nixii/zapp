@@ -1,7 +1,6 @@
 package api
 
 import (
-	"fmt"
 	"net/http"
 
 	"nixii.dev/zipp/requests"
@@ -14,18 +13,23 @@ func Put(w http.ResponseWriter, req *http.Request) error {
 	var data requests.PutRequest
 	err := getJson(req, &data)
 	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte(err.Error()))
 		return err
 	}
 
 	// Verify the data
 	err = data.VerifyRequest()
 	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte(err.Error()))
 		return err
 	}
 
 	// Load the file
 	saves, err := save.ReadSaveFile(data.MasterPassword)
 	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
 		return err
 	}
 
@@ -34,13 +38,15 @@ func Put(w http.ResponseWriter, req *http.Request) error {
 		Password:  *data.Password,
 		Email: *data.Email,
 	})
-	fmt.Println(saves)
 
 	// Set the password file
 	err = save.WriteSaveFile(saves, data.MasterPassword)
 	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
 		return err
 	}
-	
+
+	// Success
+	w.WriteHeader(http.StatusOK)
 	return nil
 }

@@ -8,6 +8,8 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
+
+	"nixii.dev/zipp/crypt"
 )
 
 const (
@@ -76,11 +78,10 @@ func ReadSaveFile(mpwd string) (*PasswordFile, error) {
 	}
 
 	// Decrypt the file
-	// decrypted, err := crypt.Decrypt(data, mpwd)
-	// if err != nil {
-	// 	return nil, err
-	// }
-	decrypted := data
+	decrypted, err := crypt.Decrypt(data, mpwd)
+	if err != nil {
+		return nil, err
+	}
 
 	// Special info
 	if decrypted == nil {
@@ -101,21 +102,24 @@ func ReadSaveFile(mpwd string) (*PasswordFile, error) {
 // Write the save file
 func WriteSaveFile(pFile *PasswordFile, mpwd string) error {
 
+	// TUrn the file into json
 	marshaled, err := json.Marshal(pFile)
 	if err != nil {
 		return err
 	}
 
-	// encrypted, err := crypt.Encrypt(marshaled, mpwd)
-	// if err != nil {
-	// 	return err
-	// }
-	encrypted := marshaled
+	// Encrypt the file
+	encrypted, err := crypt.Encrypt(marshaled, mpwd)
+	if err != nil {
+		return err
+	}
 
+	// Write the file
 	err = os.WriteFile(saveFile, encrypted, 0770)
 	if err != nil {
 		return err
 	}
 
+	// Error
 	return nil
 }
