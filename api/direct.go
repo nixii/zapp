@@ -12,32 +12,17 @@ func HandleRequest(w http.ResponseWriter, r *http.Request) {
 	var err error
 	
 	// Handle requests
-	if r.Method == http.MethodGet {
+	switch r.Method {
+	case http.MethodGet:
 		err = Get(w, r)
-	} else if r.Method == http.MethodPut {
+	case http.MethodPut:
 		err = Put(w, r)
-	} else {
+	default:
 		err = errors.ErrUnsupported
 		w.WriteHeader(http.StatusMethodNotAllowed)
 	}
 
 	// If any errors occurred
-	if err != nil {
-		fmt.Printf("An error has occurred: %s\n", err)
-	}
-}
-
-func HandleKeyExchangeRequest(w http.ResponseWriter, r *http.Request) {
-	
-	var err error
-
-	if r.Method == http.MethodGet {
-		err = GetKeys(w, r)
-	} else {
-		err = errors.ErrUnsupported
-		w.WriteHeader(http.StatusMethodNotAllowed)
-	}
-
 	if err != nil {
 		fmt.Printf("An error has occurred: %s\n", err)
 	}
