@@ -1,12 +1,15 @@
 package main
 
 import (
+	"crypto/tls"
 	"errors"
 	"fmt"
+	"log"
 	"net/http"
 	"os"
 
 	"nixii.dev/zipp/api"
+	"nixii.dev/zipp/crypt"
 	"nixii.dev/zipp/save"
 )
 
@@ -14,8 +17,18 @@ func main() {
 	
 	// Attempt making the save dir and file
 	if err := save.Init() ; err != nil {
-		fmt.Printf("Error initiating save: %s\n", err)
-		return
+		log.Fatalf("Error initiating save: %s", err)
+	}
+
+	// Attempt getting the secure stuff
+	if err := crypt.Init() ; err != nil {
+		log.Fatalf("failed to load crypt: %s", err)
+	}
+
+	// TLS conf
+	tlsconf := &tls.Config{
+		Certificates: []tls.Certificate{crypt.MyCertificate},
+		MinVersion: tls.VersionTLS13,
 	}
 
 	// Start the server
@@ -24,8 +37,15 @@ func main() {
 	// Connect the function
 	mux.HandleFunc("/pwd/", api.HandleRequest)
 
+	// Make a server
+	server := &http.Server{
+		Addr: ":2327",
+		Handler: mux,
+		TLSConfig: tlsconf,
+	}
+
 	// Init the server
-	err := http.ListenAndServe(":2327", mux)
+	err := server.ListenAndServeTLS("", "")
 
 	// Check the error
 	if errors.Is(err, http.ErrServerClosed) {

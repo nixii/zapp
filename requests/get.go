@@ -18,9 +18,9 @@ type GetResponse struct {
 }
 
 // Verify a get request
-func (self *GetRequest) VerifyRequest() error {
-	if self.Website == ""        { return WebsiteRequired }
-	if self.Username == ""       { return UsernameRequired } 
-	if self.MasterPassword == "" { return MissingMasterPassword }
+func (req *GetRequest) VerifyRequest() error {
+	if req.Website == ""        { return ErrWebsiteRequired }
+	if req.Username == ""       { return ErrUsernameRequired } 
+	if req.MasterPassword == "" { return ErrMissingMasterPassword }
 	return nil
 }
