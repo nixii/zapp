@@ -17,6 +17,8 @@ func HandleRequest(w http.ResponseWriter, r *http.Request) {
 		err = Get(w, r)
 	case http.MethodPut:
 		err = Put(w, r)
+	case http.MethodPatch:
+		err = Patch(w, r)
 	default:
 		err = errors.ErrUnsupported
 		w.WriteHeader(http.StatusMethodNotAllowed)
