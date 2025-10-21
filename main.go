@@ -35,7 +35,8 @@ func main() {
 	mux := http.NewServeMux()
 	
 	// Connect the function
-	mux.HandleFunc("/pwd/", api.HandleRequest)
+	mux.HandleFunc("/pwd/", api.HandlePwdRequest)
+	mux.HandleFunc("/cmp/", api.HandleCmpRequest)
 
 	// Make a server
 	server := &http.Server{

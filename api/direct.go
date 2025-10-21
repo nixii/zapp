@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-func HandleRequest(w http.ResponseWriter, r *http.Request) {
+func HandlePwdRequest(w http.ResponseWriter, r *http.Request) {
 	
 	// Get ready to handle errors
 	var err error
@@ -25,6 +25,22 @@ func HandleRequest(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// If any errors occurred
+	if err != nil {
+		fmt.Printf("An error has occurred: %s\n", err)
+	}
+}
+
+func HandleCmpRequest(w http.ResponseWriter, r *http.Request) {
+
+	var err error
+
+	switch r.Method {
+	case http.MethodPatch:
+		err = PatchCmp(w, r)
+	default:
+		err = errors.ErrUnsupported
+	}
+
 	if err != nil {
 		fmt.Printf("An error has occurred: %s\n", err)
 	}
