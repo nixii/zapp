@@ -55,7 +55,7 @@ func Init() error {
 
 	// Create the basic file
 	if _, err := os.Stat(filePath); err != nil {
-		err := os.WriteFile(filePath, []byte("{}"), 0770)
+		err := os.WriteFile(filePath, []byte(""), 0770)
 		if err != nil {
 			return err
 		}
