@@ -37,6 +37,7 @@ func main() {
 	// Connect the function
 	mux.HandleFunc("/pwd/", api.HandlePwdRequest)
 	mux.HandleFunc("/cmp/", api.HandleCmpRequest)
+	mux.HandleFunc("/allpwds/", api.HandleAllRequest)
 
 	// Make a server
 	server := &http.Server{

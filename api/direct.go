@@ -42,7 +42,27 @@ func HandleCmpRequest(w http.ResponseWriter, r *http.Request) {
 		err = errors.ErrUnsupported
 	}
 
+	// If any errors occurred
 	if err != nil {
 		fmt.Printf("An error has occurred: %s\n", err)
+		w.Write([]byte(err.Error()))
+	}
+}
+
+func HandleAllRequest(w http.ResponseWriter, r *http.Request) {
+
+	var err error
+
+	switch r.Method {
+	case http.MethodGet:
+		err = GetAll(w, r)
+	default:
+		err = errors.ErrUnsupported
+	}
+
+	// If any errors occurred
+	if err != nil {
+		fmt.Printf("An error has occurred: %s\n", err)
+		w.Write([]byte(err.Error()))
 	}
 }

@@ -78,3 +78,18 @@ func (pwf PasswordFile) RemovePassword(site string, username string) error {
 
 	return nil
 }
+
+func (pwf PasswordFile) Headers() map[string][]string {
+	m := make(map[string][]string)
+
+	for k := range pwf {
+		m[k] = make([]string, len(pwf[k]))
+		i := 0
+		for u := range pwf[k] {
+			m[k][i] = u
+			i += 1
+		}
+	}
+
+	return m
+}
