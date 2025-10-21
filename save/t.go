@@ -49,21 +49,21 @@ func (pwf *PasswordFile) GetAccountInfo(site string, username string) (*Password
 }
 
 // Write a password
-func (pwf *PasswordFile) SetPassword(site string, username string, password Password) error {
-	siteinfo := (*pwf)[site]
+func (pwf PasswordFile) SetPassword(site string, username string, password Password) error {
+	siteinfo := pwf[site]
 	if siteinfo == nil {
 		siteinfo = make(map[string]Password)
 	}
 
 	siteinfo[username] = password
-	(*pwf)[site] = siteinfo
+	pwf[site] = siteinfo
 
 	return nil
 }
 
 // Remove a password
-func (pwf *PasswordFile) RemovePassword(site string, username string) error {
-	siteinfo := (*pwf)[site]
+func (pwf PasswordFile) RemovePassword(site string, username string) error {
+	siteinfo := pwf[site]
 	if siteinfo == nil {
 		return ErrPasswordNotFound
 	}
@@ -71,9 +71,9 @@ func (pwf *PasswordFile) RemovePassword(site string, username string) error {
 	delete(siteinfo, username)
 
 	if len(siteinfo) != 0 {
-		(*pwf)[site] = siteinfo
+		pwf[site] = siteinfo
 	} else {
-		(*pwf)[site] = nil
+		delete(pwf, site)
 	}
 
 	return nil

@@ -27,6 +27,7 @@ func HandlePwdRequest(w http.ResponseWriter, r *http.Request) {
 	// If any errors occurred
 	if err != nil {
 		fmt.Printf("An error has occurred: %s\n", err)
+		w.Write([]byte(err.Error()))
 	}
 }
 

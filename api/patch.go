@@ -1,6 +1,7 @@
 package api
 
 import (
+	"fmt"
 	"net/http"
 
 	"nixii.dev/zipp/requests"
@@ -47,12 +48,27 @@ func Patch(w http.ResponseWriter, r *http.Request) error {
 		pwd.Password = data.To.Password
 	}
 
+	// To loc
+	toSite := data.From.Website
+	toUser := data.From.Username
+	if data.To.Website != "" {
+		toSite = data.To.Website
+	}
+	if data.To.Username != "" {
+		toUser = data.To.Username
+	}
+
 	// Just remove and replace the new password lol
 	_ = saves.RemovePassword(data.From.Website, data.From.Username)
-	err = saves.SetPassword(data.To.Website, data.To.Username, *pwd)
+	fmt.Println(data.To)
+	err = saves.SetPassword(toSite, toUser, *pwd)
 	if err != nil {
 		return err
 	}
+	fmt.Println(saves)
+
+	// Write the file
+	save.WriteSaveFile(saves, data.MasterPassword)
 
 	// Woohoooo
 	w.WriteHeader(http.StatusOK)
