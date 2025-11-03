@@ -79,6 +79,7 @@ func (pwf PasswordFile) RemovePassword(site string, username string) error {
 	return nil
 }
 
+// Get every site and username saved
 func (pwf PasswordFile) Headers() map[string][]string {
 	m := make(map[string][]string)
 
