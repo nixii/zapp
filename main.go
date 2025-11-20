@@ -1,7 +1,6 @@
 package main
 
 import (
-	"crypto/tls"
 	"errors"
 	"fmt"
 	"log"
@@ -26,10 +25,10 @@ func main() {
 	}
 
 	// TLS conf
-	tlsconf := &tls.Config{
-		Certificates: []tls.Certificate{crypt.MyCertificate},
-		MinVersion: tls.VersionTLS13,
-	}
+	// tlsconf := &tls.Config{
+	// 	Certificates: []tls.Certificate{crypt.MyCertificate},
+	// 	MinVersion: tls.VersionTLS13,
+	// }
 
 	// Start the server
 	mux := http.NewServeMux()
@@ -43,11 +42,10 @@ func main() {
 	server := &http.Server{
 		Addr: ":2327",
 		Handler: mux,
-		TLSConfig: tlsconf,
 	}
 
 	// Init the server
-	err := server.ListenAndServeTLS("", "")
+	err := server.ListenAndServe()
 
 	// Check the error
 	if errors.Is(err, http.ErrServerClosed) {

@@ -2,6 +2,7 @@ package api
 
 import (
 	"encoding/json"
+	"errors"
 	"net/http"
 
 	"nixii.dev/zipp/requests"
@@ -15,7 +16,7 @@ func GetAll(w http.ResponseWriter, r *http.Request) error {
 	err := getJson(r, &data)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
-		return err
+		return errors.New("Input JSON mangled.")
 	}
 
 	// Verify the data

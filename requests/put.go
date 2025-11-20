@@ -17,6 +17,6 @@ type PutRequest struct {
 func (req *PutRequest) VerifyRequest() error {
 	if req.Website == ""        { return ErrWebsiteRequired }
 	if req.Username == ""       { return ErrUsernameRequired }
-	if req.MasterPassword == "" {return ErrMissingMasterPassword}
+	if req.MasterPassword == "" { return ErrMissingMasterPassword }
 	return nil
 }
