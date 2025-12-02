@@ -7,8 +7,6 @@ import (
 	"nixii.dev/zipp/save"
 )
 
-// TODO: finish
-
 func Delete(w http.ResponseWriter, r *http.Request) error {
 
 	// Get the request

@@ -1,12 +1,12 @@
-# TODOs
+# TODO
 Just a list of desired goals before this project is "done".
 
 ## Server
-[] post-quantum encryption algorithm
-[] Prevent errors from crashing the server
+ [] post-quantum encryption algorithm
 
-## Endpoints
-[] change data
+## Transfer
+ [] make the transfer server
+ [] secure transfer server
 
 ## Extra Features
-[] store 2fa recovery codes 
+ [] store 2fa recovery codes 
