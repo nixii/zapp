@@ -11,7 +11,7 @@ func HandlePwdRequest(w http.ResponseWriter, r *http.Request) {
 	// Get ready to handle errors
 	var err error
 	w.Header().Add("Access-Control-Allow-Origin", "*")
-	w.Header().Add("Access-Control-Allow-Methods", "GET, PUT, PATCH, POST")
+	w.Header().Add("Access-Control-Allow-Methods", "GET, PUT, PATCH, POST, DELETE")
 	w.Header().Add("Access-Control-Allow-Headers", "Origin, X-Requested-With,Content-Type, Accept")
 	if (r.Method == http.MethodOptions) {
 		w.WriteHeader(http.StatusOK);
@@ -26,6 +26,8 @@ func HandlePwdRequest(w http.ResponseWriter, r *http.Request) {
 		err = Put(w, r)
 	case http.MethodPatch:
 		err = Patch(w, r)
+	case http.MethodDelete:
+		err = Delete(w, r)
 	default:
 		err = errors.ErrUnsupported
 		w.WriteHeader(http.StatusMethodNotAllowed)
