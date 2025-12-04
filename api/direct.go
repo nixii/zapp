@@ -90,3 +90,29 @@ func HandleAllRequest(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte(err.Error()))
 	}
 }
+
+func HandleTransfRequest(w http.ResponseWriter, r *http.Request) {
+
+	var err error
+	w.Header().Add("Access-Control-Allow-Origin", "*")
+	w.Header().Add("Access-Control-Allow-Methods", "GET, PUT, PATCH, POST")
+	w.Header().Add("Access-Control-Allow-Headers", "Origin, X-Requested-With,Content-Type, Accept")
+	if (r.Method == http.MethodOptions) {
+		w.WriteHeader(http.StatusOK);
+		return
+	}
+
+	switch r.Method {
+		case http.MethodPost:
+			err = PostTransf(w, r)
+		default:
+			err = errors.ErrUnsupported
+			w.WriteHeader(http.StatusBadRequest)
+	}
+
+	// If any errors occurred
+	if err != nil {
+		fmt.Printf("An error has occurred: %s\n", err)
+		w.Write([]byte(err.Error()))
+	}
+}
