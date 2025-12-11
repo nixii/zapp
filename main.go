@@ -25,12 +25,6 @@ func main() {
 		log.Fatalf("failed to load crypt: %s", err)
 	}
 
-	// TLS conf
-	// tlsconf := &tls.Config{
-	// 	Certificates: []tls.Certificate{crypt.MyCertificate},
-	// 	MinVersion: tls.VersionTLS13,
-	// }
-
 	// Start the server
 	mux := http.NewServeMux()
 
