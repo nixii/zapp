@@ -1,15 +1,11 @@
-package requests;
-
-import (
-	"fmt"
-);
+package requests
 
 type TransferRequest struct {
-	Receiving bool,
+	Receiving bool
 	MasterPassword string
 }
 
 func (req *TransferRequest) VerifyRequest() error {
-	if MasterPassword == ""  { return ErrMasterPasswordRequired }
+	if req.MasterPassword == ""  { return ErrMissingMasterPassword }
 	return nil
 }

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"crypto/tls"
 	"errors"
 	"fmt"
 	"log"
@@ -32,6 +33,11 @@ func main() {
 
 	// Start the server
 	mux := http.NewServeMux()
+
+	// Create the self-signed certificate
+	tlsConf := &tls.Config{
+		Certificates: []tls.Certificate{crypt.MyCertificate},
+	}
 	
 	// Connect the function
 	mux.HandleFunc("/pwd/", api.HandlePwdRequest)
@@ -43,10 +49,12 @@ func main() {
 	server := &http.Server{
 		Addr: ":2327",
 		Handler: mux,
+		TLSConfig: tlsConf,
 	}
 
 	// Init the server
-	err := server.ListenAndServe()
+	defer server.Close()
+	err := server.ListenAndServeTLS("", "")
 
 	// Check the error
 	if errors.Is(err, http.ErrServerClosed) {

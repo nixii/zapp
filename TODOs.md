@@ -12,5 +12,5 @@ Just a list of desired goals before this project is "done".
    [] the reciever reads their password file and the recieved password file and combines everything
      [] the sent file takes priority when overwriting
 
-## Extra Features
+## Extra Features, maybe
  [] store 2fa recovery codes
