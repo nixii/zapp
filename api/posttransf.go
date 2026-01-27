@@ -2,6 +2,7 @@ package api
 
 import (
 	"net/http"
+	"fmt"
 
 	"nixii.dev/zipp/requests"
 )
@@ -17,6 +18,10 @@ func PostTransf(w http.ResponseWriter, r *http.Request) error {
 		return err
 	}
 
+	if (data.From != "") {
+		fmt.Println("Wooo!")
+	}
+
 	// Verify the data
 	err = data.VerifyRequest()
 	if err != nil {
@@ -29,3 +34,4 @@ func PostTransf(w http.ResponseWriter, r *http.Request) error {
 	w.WriteHeader(http.StatusOK)
 	return nil
 }
+

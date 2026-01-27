@@ -3,6 +3,7 @@ package requests
 type TransferRequest struct {
 	Receiving bool
 	MasterPassword string
+	From string
 }
 
 func (req *TransferRequest) VerifyRequest() error {
