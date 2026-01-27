@@ -2,7 +2,6 @@ package api
 
 import (
 	"net/http"
-	"fmt"
 
 	"nixii.dev/zipp/requests"
 )
@@ -18,17 +17,17 @@ func PostTransf(w http.ResponseWriter, r *http.Request) error {
 		return err
 	}
 
-	// Is this request getting it from somewhere 
-	if (data.From != "") {
-		fmt.Println("Wooo!")
-	}
-
 	// Verify the data
 	err = data.VerifyRequest()
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		w.Write([]byte(err.Error()))
 		return err
+	}
+
+	// enable the system
+	if (data.Receiving) {
+	} else {
 	}
 
 	// All good! :D

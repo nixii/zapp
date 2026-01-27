@@ -8,5 +8,6 @@ type TransferRequest struct {
 
 func (req *TransferRequest) VerifyRequest() error {
 	if req.MasterPassword == ""  { return ErrMissingMasterPassword }
+	if req.From == "" { req.Receiving = false }
 	return nil
 }
