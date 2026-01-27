@@ -18,6 +18,7 @@ func PostTransf(w http.ResponseWriter, r *http.Request) error {
 		return err
 	}
 
+	// Is this request getting it from somewhere 
 	if (data.From != "") {
 		fmt.Println("Wooo!")
 	}
