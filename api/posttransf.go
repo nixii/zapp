@@ -6,6 +6,8 @@ import (
 	"nixii.dev/zipp/requests"
 )
 
+var receiving bool
+
 func PostTransf(w http.ResponseWriter, r *http.Request) error {
 
 	// Get the request
@@ -26,12 +28,14 @@ func PostTransf(w http.ResponseWriter, r *http.Request) error {
 	}
 
 	// enable the system
-	if (data.Receiving) {
+	if (data.From == "") {
+		receiving = data.Receiving
 	} else {
+		// send the data back
+		w.Write([]byte/* the data */); //TODO: write the password file
 	}
 
 	// All good! :D
 	w.WriteHeader(http.StatusOK)
 	return nil
 }
-
