@@ -2,8 +2,10 @@ package api
 
 import (
 	"net/http"
+	"fmt"
 
 	"nixii.dev/zipp/requests"
+	"nixii.dev/zipp/save"
 )
 
 var receiving bool
@@ -32,7 +34,12 @@ func PostTransf(w http.ResponseWriter, r *http.Request) error {
 		receiving = data.Receiving
 	} else {
 		// send the data back
-		w.Write([]byte/* the data */); //TODO: write the password file
+		data, err := save.ReadSaveFileBytes()
+		if (err != nil) {
+			return err
+		}
+		w.Write(data); //TODO: write the password file
+		fmt.Println(data)
 	}
 
 	// All good! :D

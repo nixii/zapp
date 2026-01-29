@@ -8,6 +8,7 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
+	"fmt"
 
 	"nixii.dev/zipp/crypt"
 )
@@ -78,6 +79,7 @@ func ReadSaveFileBytes() ([]byte, error) {
 	}
 
 	// return the data
+	fmt.Println(data)
 	return data, nil
 }
 
