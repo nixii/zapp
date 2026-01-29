@@ -38,7 +38,7 @@ func PostTransf(w http.ResponseWriter, r *http.Request) error {
 		if (err != nil) {
 			return err
 		}
-		w.Write(data); //TODO: write the password file
+		w.Write(data); 
 		fmt.Println(data)
 	}
 
