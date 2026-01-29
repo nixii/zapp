@@ -68,6 +68,24 @@ func Init() error {
 	return nil
 }
 
+// Read the save file as bytes
+func ReadSaveFileBytes() ([]byte, error) {
+	
+	// read the data
+	data, err := os.ReadFile(saveFile)
+	if err != nil {
+		return nil, err
+	}
+
+	// return the data
+	return data, nil
+}
+
+// Write the save file as bytes
+func WriteSaveFileBytes(bytes []byte) error {
+	return os.WriteFile(saveFile, bytes, 0770)
+}
+
 // Read the save file
 func ReadSaveFile(mpwd string) (*PasswordFile, error) {
 	
