@@ -37,6 +37,7 @@ func main() {
 	mux.HandleFunc("/cmp/", api.HandleCmpRequest)
 	mux.HandleFunc("/allpwds/", api.HandleAllRequest)
 	mux.HandleFunc("/transf/", api.HandleTransfRequest)
+	mux.HandleFunc("/recv/", api.HandleRecvRequest)
 
 	// Make a server
 	server := &http.Server{
