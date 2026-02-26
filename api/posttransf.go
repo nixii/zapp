@@ -39,7 +39,7 @@ func PostTransf(w http.ResponseWriter, r *http.Request) error {
 			return err
 		}
 		w.Write(data); 
-		fmt.Println(data)
+		fmt.Println(string(data))
 	}
 
 	// All good! :D
