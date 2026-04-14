@@ -3,8 +3,8 @@ package api
 import (
 	"net/http"
 
-	"nixii.dev/zipp/requests"
-	"nixii.dev/zipp/save"
+	"nixii.dev/zapp/requests"
+	"nixii.dev/zapp/save"
 )
 
 func Delete(w http.ResponseWriter, r *http.Request) error {

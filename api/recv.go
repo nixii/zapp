@@ -3,7 +3,7 @@ package api
 import (
 	"net/http"
 	"io"
-	"nixii.dev/zipp/save"
+	"nixii.dev/zapp/save"
 )
 
 func RecvRequest(w http.ResponseWriter, req *http.Request) error {

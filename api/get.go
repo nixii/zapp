@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"nixii.dev/zipp/requests"
-	"nixii.dev/zipp/save"
+	"nixii.dev/zapp/requests"
+	"nixii.dev/zapp/save"
 )
 
 func Get(w http.ResponseWriter, req *http.Request) error {

@@ -4,8 +4,8 @@ import (
 	"net/http"
 	"fmt"
 
-	"nixii.dev/zipp/requests"
-	"nixii.dev/zipp/save"
+	"nixii.dev/zapp/requests"
+	"nixii.dev/zapp/save"
 )
 
 var receiving bool

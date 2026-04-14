@@ -7,9 +7,9 @@ import (
 	"net/http"
 	"os"
 
-	"nixii.dev/zipp/api"
-	"nixii.dev/zipp/crypt"
-	"nixii.dev/zipp/save"
+	"nixii.dev/zapp/api"
+	"nixii.dev/zapp/crypt"
+	"nixii.dev/zapp/save"
 )
 
 func main() {

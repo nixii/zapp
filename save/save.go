@@ -10,7 +10,7 @@ import (
 	"runtime"
 	"fmt"
 
-	"nixii.dev/zipp/crypt"
+	"nixii.dev/zapp/crypt"
 )
 
 const (
