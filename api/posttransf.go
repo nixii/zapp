@@ -29,6 +29,12 @@ func PostTransf(w http.ResponseWriter, r *http.Request) error {
 		return err
 	}
 
+	if (data.Receiving) {
+	     fmt.Println("receiving!")
+	} else {
+	     fmt.Println("not receiving..")
+	}
+
 	// enable the system
 	if (data.From == "") {
 		receiving = data.Receiving
@@ -38,7 +44,7 @@ func PostTransf(w http.ResponseWriter, r *http.Request) error {
 		if (err != nil) {
 			return err
 		}
-		w.Write(data); 
+		w.Write(data)
 		fmt.Println(string(data))
 	}
 

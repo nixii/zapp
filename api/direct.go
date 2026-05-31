@@ -92,6 +92,7 @@ func HandleAllRequest(w http.ResponseWriter, r *http.Request) {
 }
 
 func HandleTransfRequest(w http.ResponseWriter, r *http.Request) {
+     fmt.Println("handle transf.")
 
 	var err error
 	w.Header().Add("Access-Control-Allow-Origin", "*")
